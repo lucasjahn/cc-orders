@@ -1,20 +1,20 @@
 <template>
     <div class="c-product">
-        <select v-model="newProduct.product">
+        <select v-model.lazy="product.product" @change="updateProduct">
             <option value=""></option>
-            <option value="option.value" v-for="option in products">{{ option.label }}</option>
+            <option :value="option.value" v-for="option in apiProducts">{{ option.label }}</option>
         </select>
 
         <div class="c-product__quantity">
             Quantity
-            <button type="button" @click="newProduct.quantity--">-</button><span>{{ newProduct.quantity }}</span><button type="button" @click="newProduct.quantity++">+</button>
+            <button type="button" @click="decreaseQuantity" :disabled="product.quantity === 0">-</button><span>{{ product.quantity }}</span><button type="button" @click="increaseQuantity">+</button>
         </div>
 
         <div class="c-product__price">Price</div>
 
         <div class="c-product__dates">Dates
-            <input type="text" v-model="newProduct.from">
-            <input type="text" v-model="newProduct.to">
+            <input type="text" v-model.lazy="product.from" @change="updateProduct">
+            <input type="text" v-model.lazy="product.to" @change="updateProduct">
         </div>
 
         <button class="c-product__delete" type="button" @click="removeProduct">Delete</button>
@@ -22,17 +22,9 @@
 </template>
 
 <script>
+    import { mapGetters } from 'vuex';
+
     export default {
-        data() {
-          return {
-            newProduct: {
-                product: '',
-                quantity: 1,
-                from: '',
-                to: '',
-            },
-          };
-        },
         props: {
             product: {
                 type: Object,
@@ -40,15 +32,24 @@
             }
         },
         methods: {
-            updateNewProduct() {
-                this.newProduct.id = this.product.id;
-
-                this.$emit('productUpdated', this.newProduct);
+            increaseQuantity() {
+                this.product.quantity++;
+                this.updateProduct();
+            },
+            decreaseQuantity() {
+                this.product.quantity--;
+                this.updateProduct();
+            },
+            updateProduct() {
+                this.$store.commit('updateProductToOrder', this.product);
             },
             removeProduct() {
-                //eventStore.$emit('removeProduct', this.product.id);
+                this.$store.commit('deleteProductToOrder', this.product);
             }
-        }
+        },
+        computed: mapGetters({
+            apiProducts: 'apiProducts',
+        })
     }
 </script>
 

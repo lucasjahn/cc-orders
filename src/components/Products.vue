@@ -1,38 +1,37 @@
 <template>
     <div class="c-products">
-        <cc-product-row v-for="productRow in productsRows" :products="apiProducts"></cc-product-row>
+        <cc-product-row v-if="productsToOrder.length > 0" v-for="productToOrder in productsToOrder" :product="productToOrder" :key="productToOrder.id"></cc-product-row>
         <button @click="addProduct" type="button">Add Product</button>
     </div>
 </template>
 
 <script>
     import ProductRow from '@/components/ProductRow';
+    import { mapGetters } from 'vuex';
+    import uuid from 'uuid/v4';
 
     export default {
-        data() {
-            return {
-                productsRows: [],
-                apiProducts: [],
-            }
-        },
         components: {
             ccProductRow: ProductRow,
         },
         methods: {
             addProduct() {
-                let newProduct = {
-                    id: 1,
+                const newProduct = {
+                    id: uuid(),
+                    product: '',
+                    quantity: 1,
+                    from: '',
+                    to: '',
                 };
 
-                this.productsRows.push(newProduct);
+                this.$store.commit('addProductToOrder', newProduct);
             },
-            removeProduct() {
-                let newProduct = {
-                    id: 1,
-                };
-
-                this.products.push(newProduct);
-            }
+        },
+        computed: mapGetters({
+            productsToOrder: 'productsToOrder'
+        }),
+        created() {
+            this.$store.dispatch('loadApiProducts');
         }
     }
 </script>

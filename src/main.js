@@ -4,6 +4,8 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+import {store} from './store/store';
+
 Vue.config.productionTip = false;
 
 const eventStore = new Vue();
@@ -11,6 +13,7 @@ const eventStore = new Vue();
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  store,
   router,
   template: '<App/>',
   components: { App }
