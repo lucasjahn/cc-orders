@@ -1,7 +1,10 @@
 <template>
     <div class="c-products">
-        <cc-product-row v-if="productsToOrder.length > 0" v-for="productToOrder in productsToOrder" :product="productToOrder" :key="productToOrder.id"></cc-product-row>
-        <button @click="addProduct" type="button">Add Product</button>
+        <div class="c-container">
+            <h2>Produkte</h2>
+            <cc-product-row v-if="productsToOrder.length > 0" v-for="productToOrder in productsToOrder" :product="productToOrder" :key="productToOrder.id"></cc-product-row>
+            <button @click="addProduct" type="button">Add Product</button>
+        </div>
     </div>
 </template>
 
@@ -37,4 +40,7 @@
 </script>
 
 <style scoped>
+    .c-products {
+        width: 50vw;
+    }
 </style>

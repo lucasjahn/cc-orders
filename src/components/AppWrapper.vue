@@ -1,41 +1,34 @@
 <template>
   <div class="c-app-wrapper">
-    <div class="c-main-content">
-      <h1>Neue Bestellung</h1>
-      <cc-new-order></cc-new-order>
-    </div>
-    <div class="c-sidebar">
-    </div>
+    <cc-new-order></cc-new-order>
+    <cc-footer-bar></cc-footer-bar>
   </div>
 </template>
 
 <script>
   import NewOrder from '@/components/NewOrder';
+  import FooterBar from '@/components/FooterBar';
 
   export default {
       components: {
         ccNewOrder: NewOrder,
+        ccFooterBar: FooterBar,
       }
   }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
   h1, h2 {
     font-weight: normal;
   }
 
   .c-app-wrapper {
-    display: flex;
+    margin-top: 60px;
   }
 
-  .c-main-content {
-    background: #f2f2f2;
-    width: 65vw;
-  }
-
-  .c-sidebar {
-    background: #ccc;
-    width: 35vw;
+  .c-container {
+    max-width: 70%;
+    margin: 0 auto;
   }
 </style>
