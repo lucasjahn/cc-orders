@@ -1,3 +1,6 @@
+import axios from 'axios';
+import appConfig from '../../config.json';
+
 const state = {
     productsToOrder: [],
     apiProducts: [],
@@ -33,12 +36,20 @@ const mutations = { // for sync stuff
         }
     },
     loadApiProducts() {
-        const product = {
-            label: 'Test',
-            value: 'test'
-        };
-
-        state.apiProducts.push(product);
+        axios.get(appConfig.API.apiRoot + appConfig.API.routes.publishedProducts, {
+            auth: {
+                username: appConfig.API.clientKey,
+                password: appConfig.API.clientSecret,
+            },
+        })
+        .then((res) => {
+           state.apiProducts = res.data.map((product) => {
+               return {
+                   label: product.name,
+                   value: product.id,
+               }
+            });
+        });
     }
 };
 

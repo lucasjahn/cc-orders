@@ -33,7 +33,7 @@
         computed: mapGetters({
             productsToOrder: 'productsToOrder'
         }),
-        created() {
+        beforeMount() {
             this.$store.dispatch('loadApiProducts');
         }
     }
