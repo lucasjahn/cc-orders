@@ -10,7 +10,15 @@
             <button type="button" @click="decreaseQuantity" :disabled="product.quantity === 0">-</button><span>{{ product.quantity }}</span><button type="button" @click="increaseQuantity">+</button>
         </div>
 
-        <div class="c-product__price">Price</div>
+        <div class="c-product__price">
+            Appointment ID
+            <input type="number" v-model.lazy="product.appointmentId"  @change="updateProduct">
+        </div>
+
+        <div class="c-product__price">
+            Price
+            <input type="number" v-model.lazy="product.price"  @change="updateProduct">
+        </div>
 
         <div class="c-product__dates">Dates
             <input type="text" v-model.lazy="product.from" @change="updateProduct">

@@ -8,6 +8,28 @@
             </div>
             <div class="row">
                 <div class="c-col c-col--6">
+                    <label for="">Total</label>
+                    <input type="number" v-model="baseData.total" @change="updateRootData">
+                </div>
+                <div class="c-col c-col--6">
+                    <label for="">Completed At</label>
+                    <input type="text" v-model="baseData.completedAt" @change="updateRootData">
+                </div>
+                <div class="c-col c-col--6">
+                    <label for="">Order ID</label>
+                    <input type="number" v-model="baseData.orderId" @change="updateRootData">
+                </div>
+                <div class="c-col c-col--6">
+                    <label for="">Order Number</label>
+                    <input type="number" v-model="baseData.orderNumber" @change="updateRootData">
+                </div>
+                <div class="c-col c-col--6">
+                    <label for="">Cust ID</label>
+                    <input type="number" v-model="customerData.id" @change="updateData">
+                </div>
+            </div>
+            <div class="row">
+                <div class="c-col c-col--6">
                     <label for="">Vorname</label>
                     <input type="text" v-model="customerData.billing.first_name" @change="updateData">
                 </div>
@@ -17,6 +39,10 @@
                 </div>
             </div>
             <div class="row">
+                <div class="c-col c-col--4">
+                    <label for="">Company</label>
+                    <input type="text" v-model="customerData.billing.company" @change="updateData">
+                </div>
                 <div class="c-col c-col--4">
                     <label for="">Straße</label>
                     <input type="text" v-model="customerData.billing.street" @change="updateData">
@@ -35,10 +61,6 @@
                 </div>
             </div>
             <div class="row">
-                <div class="c-col c-col--6">
-                    <label for="">Land</label>
-                    <input type="text" v-model="customerData.billing.country" @change="updateData">
-                </div>
                 <div class="c-col c-col--6">
                     <label for="">Adresse Zusatzinformation</label>
                     <input type="text" v-model="customerData.billing.address_2" @change="updateData">
@@ -104,10 +126,6 @@
             </div>
             <div class="row">
                 <div class="c-col c-col--6">
-                    <label for="">Land</label>
-                    <input type="text" v-model="customerData.shipping.country" @change="updateData">
-                </div>
-                <div class="c-col c-col--6">
                     <label for="">Adresse Zusatzinformation</label>
                     <input type="text" v-model="customerData.shipping.address_2" @change="updateData">
                 </div>
@@ -122,12 +140,18 @@
         methods: {
             updateData() {
                 this.$store.commit('updateCustomerData', this.customerData);
+            },
+            updateRootData() {
+                this.$store.commit('updateValue', this.baseData);
             }
         },
         computed: {
             customerData() {
                 return this.$store.getters.customerData;
-            }
+            },
+            baseData() {
+                return this.$store.getters.baseData;
+            },
         },
      };
 </script>

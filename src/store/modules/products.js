@@ -36,17 +36,12 @@ const mutations = { // for sync stuff
         }
     },
     loadApiProducts() {
-        axios.get(appConfig.API.apiRoot + appConfig.API.routes.publishedProducts, {
-            auth: {
-                username: appConfig.API.clientKey,
-                password: appConfig.API.clientSecret,
-            },
-        })
+        axios.get(appConfig.API.apiRoot + appConfig.API.routes.publishedProducts)
         .then((res) => {
            state.apiProducts = res.data.map((product) => {
                return {
-                   label: product.name,
-                   value: product.id,
+                   label: product.fields.title,
+                   value: product.fields.wc_id,
                }
             });
         });

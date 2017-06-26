@@ -1,9 +1,11 @@
 const state = {
     set_paid: false,
     differentShipping: false,
+    id: 1,
     billing: {
         first_name: '',
         last_name: '',
+        company: '',
         street: '',
         street_nr: '',
         address_2: '',
@@ -16,6 +18,7 @@ const state = {
     shipping: {
         first_name: '',
         last_name: '',
+        company: '',
         street: '',
         street_nr: '',
         address_2: '',
