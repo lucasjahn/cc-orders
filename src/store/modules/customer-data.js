@@ -1,6 +1,7 @@
 const state = {
     set_paid: false,
     differentShipping: false,
+    sendMails: false,
     id: 1,
     billing: {
         first_name: '',

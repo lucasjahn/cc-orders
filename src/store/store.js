@@ -48,6 +48,7 @@ export const store = new Vuex.Store({
                     "id": parseInt(state.orderId),
                     "order_number": parseInt(state.orderNumber),
                     "completed_at": new Date(state.completedAt),
+                    "send_mails": false,
                     "status": 'pending',
                     "total": state.total,
                     "total_tax": '0.00',
